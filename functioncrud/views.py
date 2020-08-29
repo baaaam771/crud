@@ -26,10 +26,21 @@ def create(request):
         form =NewBlog()
         return render(request, 'functioncrud/new.html', {'form':form})
 
-def update(request):
-    return
+def update(request, pk):
+    # 어떤 블로그 글을 수정할지 블로그 객체를 가져오기
+    blog = get_object_or_404(Blog, pk=pk)
 
-def delete(request):
-    return
+    # 해당하는 블로그 객체 pk에 맞는 입력공간 가져오기
+    form = NewBlog(request.POST, instance=blog)
 
-# Create your views here.
+    if form.is_valid():
+        form.save()
+        return redirect('home')
+    return render(request, 'functioncrud/new.html', {'form':form})
+
+def delete(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    blog.delete()
+    return redirect('home')
+
+
