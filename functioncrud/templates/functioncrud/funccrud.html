@@ -6,9 +6,13 @@
     <title>함수형 crud</title>
   </head>
   <body>
+    <!--글쓰기 링크(버튼)-->
+    <a href="{% url 'newblog' %}">글쓰기</a>
+
+    <!--블로그 글 띄우는 부분-->
     {% for blog in blogs %}
     <h2>{{blog.title}}</h2>
-    <h2>{{blog.body}}</h2>
+    <p>{{blog.body}}</p>
     <hr />
     {% endfor %}
   </body>
